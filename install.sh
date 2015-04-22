@@ -21,6 +21,19 @@ rm SOFTWARE/snpEff/snpEff_v3_6_GRCh37.75.zip
 
 
 
-# snpEff and the human genome (release GRCh37.75)
+# VARIANT EFFECT PREDICTOR
 
 
+# First, install the module DBI
+
+# A zip file of DBI-1.633 is included in /SOFTWARE
+
+tar -xvzf SOFTWARE/DBI-1.633.tar.gz
+rm SOFTWARE/DBI-1.633.tar.gz
+
+cd SOFTWARE/DBI-1.633/
+perl Makefile.PL
+make
+make test
+sudo make install
+cd ../..
