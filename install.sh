@@ -9,7 +9,7 @@ rm data/build_tables/CDS_genomic_coordinates_full_compresed.txt.tar.gz
 
 echo Decompressing snpEff v3_6
 mkdir SOFTWARE/snpEff
-unzip SOFTWARE/snpEff_v3_6_core.zip -d ./SOFTWARE/snpEff/
+unzip SOFTWARE/snpEff_v3_6_core.zip -d ./SOFTWARE/
 rm SOFTWARE/snpEff_v3_6_core.zip
 
 # The genome files are obtained from ELSEWHERE (#ISSUE 1)
