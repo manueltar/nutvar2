@@ -37,6 +37,19 @@ sudo make install
 cd ../..
 rm SOFTWARE/DBI-1.633.tar.gz
 
+# Second, install the module DBD-mysql
+
+# A zip file of DBI-1.633 is included in /SOFTWARE
+#~ echo THE DBD-mysql MODULE
+#~ tar -xvzf SOFTWARE/DBD-mysql-4.031.tar.gz -C SOFTWARE/
+#~ cd SOFTWARE/DBD-mysql-4.031/
+#~ perl Makefile.PL
+#~ make
+#~ make test
+#~ sudo make install
+#~ cd ../..
+#~ rm SOFTWARE/DBD-mysql-4.031.tar.gz
+
 # Decompress the VEP.zip file
 
 unzip SOFTWARE/ensembl-tools-release-75.zip -d ./SOFTWARE/
@@ -56,12 +69,19 @@ scp -r /home/manueltar/Desktop/Proyecto_NutVar2/homo_sapiens_vep_75.tar.gz SOFTW
 mkdir SOFTWARE/vep/
 mv SOFTWARE/vep/ SOFTWARE/.vep
 tar -xvzf SOFTWARE/homo_sapiens_vep_75.tar.gz -C SOFTWARE/.vep/
-tar -xvf SOFTWARE/.vep/homo_sapiens_vep_75.tar
+cd SOFTWARE/.vep/
+tar -xvf homo_sapiens_vep_75.tar
 
-echo homo_sapiens_vep_75.tar.gz
+rm homo_sapiens_vep_75.tar
+cd ../..
 
-# rm SOFTWARE/homo_sapiens_vep_75.tar.gz 
+echo erasing homo_sapiens_vep_75.tar.gz
+rm SOFTWARE/homo_sapiens_vep_75.tar.gz 
 
 
+# Creating directories needed to run nutvar2
+
+mkdir data/input/
+mkdir data/intermediate/
 
 
