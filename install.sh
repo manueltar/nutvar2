@@ -41,9 +41,9 @@ rm SOFTWARE/DBI-1.633.tar.gz
 
 unzip SOFTWARE/ensembl-tools-release-75.zip -d ./SOFTWARE/
 echo INSTALLING VEP
-perl ensembl-tools-release-75/scripts/variant_effect_predictor/INSTALL.pl
+perl SOFTWARE/ensembl-tools-release-75/scripts/variant_effect_predictor/INSTALL.pl
 
-# printf n/n
+# printf n/n (#ISSUE 2)
 
 # The genome files are obtained from ELSEWHERE (#ISSUE 1.2)
 
@@ -51,8 +51,10 @@ echo obtaining the human genome version GRCh37.75 for VEP
 
 scp -r /home/manueltar/Desktop/Proyecto_NutVar2/homo_sapiens_vep_75.tar.gz SOFTWARE/
 
-mkdir SOFTWARE/vep/tmp/homo_sapiens/75/
-mv SOFTWARE/vep/tmp/homo_sapiens/75/ SOFTWARE/.vep/tmp/homo_sapiens/75/
+# mkdir SOFTWARE/vep/tmp/homo_sapiens/75/
+
+mkdir -p SOFTWARE/{vep/{tmp/{homo_sapiens/{75,},},},}
+mv SOFTWARE/vep/ SOFTWARE/.vep
 tar -xvzf SOFTWARE/homo_sapiens_vep_75.tar.gz -C SOFTWARE/.vep/tmp/homo_sapiens/75/
 
 #~ mkdir SOFTWARE/vep
@@ -60,3 +62,4 @@ tar -xvzf SOFTWARE/homo_sapiens_vep_75.tar.gz -C SOFTWARE/.vep/tmp/homo_sapiens/
 #~ tar -xvzf SOFTWARE/homo_sapiens_vep_75.tar.gz -C SOFTWARE/.vep/
 
 
+mkdir -p myProject/{manu,doc/{api,system},tools,db}
