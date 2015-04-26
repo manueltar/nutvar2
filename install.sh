@@ -12,7 +12,7 @@ mkdir SOFTWARE/snpEff
 unzip SOFTWARE/snpEff_v3_6_core.zip -d ./SOFTWARE/
 rm SOFTWARE/snpEff_v3_6_core.zip
 
-# The genome files are obtained from ELSEWHERE (#ISSUE 1)
+# The genome files are obtained from ELSEWHERE (#ISSUE 1.1)
 
 echo obtaining the human genome version GRCh37.75
 scp -r /home/manueltar/Desktop/Proyecto_NutVar2/snpEff_v3_6_GRCh37.75.zip SOFTWARE/snpEff
@@ -27,13 +27,36 @@ rm SOFTWARE/snpEff/snpEff_v3_6_GRCh37.75.zip
 # First, install the module DBI
 
 # A zip file of DBI-1.633 is included in /SOFTWARE
-
+echo THE PERL-DBI MODULE
 tar -xvzf SOFTWARE/DBI-1.633.tar.gz -C SOFTWARE/
-#rm SOFTWARE/DBI-1.633.tar.gz
-
 cd SOFTWARE/DBI-1.633/
 perl Makefile.PL
 make
 make test
 sudo make install
 cd ../..
+rm SOFTWARE/DBI-1.633.tar.gz
+
+# Decompress the VEP.zip file
+
+unzip SOFTWARE/ensembl-tools-release-75.zip -d ./SOFTWARE/
+echo INSTALLING VEP
+perl ensembl-tools-release-75/scripts/variant_effect_predictor/INSTALL.pl
+
+# printf n/n
+
+# The genome files are obtained from ELSEWHERE (#ISSUE 1.2)
+
+echo obtaining the human genome version GRCh37.75 for VEP
+
+scp -r /home/manueltar/Desktop/Proyecto_NutVar2/homo_sapiens_vep_75.tar.gz SOFTWARE/
+
+mkdir SOFTWARE/vep/tmp/homo_sapiens/75/
+mv SOFTWARE/vep/tmp/homo_sapiens/75/ SOFTWARE/.vep/tmp/homo_sapiens/75/
+tar -xvzf SOFTWARE/homo_sapiens_vep_75.tar.gz -C SOFTWARE/.vep/tmp/homo_sapiens/75/
+
+#~ mkdir SOFTWARE/vep
+#~ mv SOFTWARE/vep SOFTWARE/.vep
+#~ tar -xvzf SOFTWARE/homo_sapiens_vep_75.tar.gz -C SOFTWARE/.vep/
+
+
