@@ -51,15 +51,17 @@ echo obtaining the human genome version GRCh37.75 for VEP
 
 scp -r /home/manueltar/Desktop/Proyecto_NutVar2/homo_sapiens_vep_75.tar.gz SOFTWARE/
 
-# mkdir SOFTWARE/vep/tmp/homo_sapiens/75/
+# mkdir -p SOFTWARE/{vep/{tmp/{homo_sapiens/{75,},},},}
 
-mkdir -p SOFTWARE/{vep/{tmp/{homo_sapiens/{75,},},},}
+mkdir SOFTWARE/vep/
 mv SOFTWARE/vep/ SOFTWARE/.vep
-tar -xvzf SOFTWARE/homo_sapiens_vep_75.tar.gz -C SOFTWARE/.vep/tmp/homo_sapiens/75/
+tar -xvzf SOFTWARE/homo_sapiens_vep_75.tar.gz -C SOFTWARE/.vep/
+tar -xvf SOFTWARE/.vep/homo_sapiens_vep_75.tar
 
-#~ mkdir SOFTWARE/vep
-#~ mv SOFTWARE/vep SOFTWARE/.vep
-#~ tar -xvzf SOFTWARE/homo_sapiens_vep_75.tar.gz -C SOFTWARE/.vep/
+echo homo_sapiens_vep_75.tar.gz
+
+# rm SOFTWARE/homo_sapiens_vep_75.tar.gz 
+
 
 
 
