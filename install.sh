@@ -62,4 +62,4 @@ tar -xvzf SOFTWARE/homo_sapiens_vep_75.tar.gz -C SOFTWARE/.vep/tmp/homo_sapiens/
 #~ tar -xvzf SOFTWARE/homo_sapiens_vep_75.tar.gz -C SOFTWARE/.vep/
 
 
-mkdir -p myProject/{manu,doc/{api,system},tools,db}
+
