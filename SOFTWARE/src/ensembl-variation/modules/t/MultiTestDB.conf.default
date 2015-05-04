@@ -1,0 +1,23 @@
+# This provides a default set of configurations which is merged with your
+# provided MultiTestDB.conf.
+#
+# You should provide a MultiTestDB.conf which defines the databases
+
+{
+  'databases' => {
+    'homo_sapiens' => { 
+      'core'      => 'Bio::EnsEMBL::DBSQL::DBAdaptor',
+      'variation' => 'Bio::EnsEMBL::Variation::DBSQL::DBAdaptor',
+      'funcgen'   => 'Bio::EnsEMBL::Funcgen::DBSQL::DBAdaptor',
+    },
+    'test_collection' => {
+      'core' => 'Bio::EnsEMBL::DBSQL::DBAdaptor',
+    },
+    'multi' => {
+      'ontology' => 'Bio::EnsEMBL::DBSQL::OntologyDBAdaptor',
+    },
+    'mapping' => {
+      'core' => 'Bio::EnsEMBL::DBSQL::DBAdaptor',
+    },
+  },
+}

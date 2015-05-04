@@ -20,7 +20,6 @@ unzip SOFTWARE/snpEff/snpEff_v3_6_GRCh37.75.zip -d ./SOFTWARE/snpEff/
 rm SOFTWARE/snpEff/snpEff_v3_6_GRCh37.75.zip
 
 
-
 # VARIANT EFFECT PREDICTOR
 
 
@@ -37,18 +36,77 @@ sudo make install
 cd ../..
 rm SOFTWARE/DBI-1.633.tar.gz
 
-# Second, install the module DBD-mysql
+# Second, install and configure mysql in case you don't have it
 
-# A zip file of DBI-1.633 is included in /SOFTWARE
-#~ echo THE DBD-mysql MODULE
-#~ tar -xvzf SOFTWARE/DBD-mysql-4.031.tar.gz -C SOFTWARE/
-#~ cd SOFTWARE/DBD-mysql-4.031/
-#~ perl Makefile.PL
-#~ make
-#~ make test
-#~ sudo make install
-#~ cd ../..
-#~ rm SOFTWARE/DBD-mysql-4.031.tar.gz
+sudo apt-get install mysql-server
+
+sudo service mysql restart
+
+# check if mysql is running
+
+sudo netstat -tap | grep mysql
+
+# Set password
+
+sudo dpkg-reconfigure mysql-server-5.5
+
+# To test the pass
+
+# mysql -u root -p
+# exit
+
+# Third, install the module DBD-mysql
+
+
+echo THE DBD-mysql MODULE
+tar -xvzf SOFTWARE/DBD-mysql-4.031.tar.gz -C SOFTWARE/
+cd SOFTWARE/DBD-mysql-4.031/
+perl Makefile.PL
+make
+make test
+sudo make install
+cd ../..
+rm SOFTWARE/DBD-mysql-4.031.tar.gz
+
+# Perl API
+
+
+# Check first 
+
+#~ $ perl -v
+#~ 
+#~ This is perl 5, version 18, subversion 2 (v5.18.2) built for x86_64-linux-gnu-thread-multi
+#~ (with 41 registered patches, see perl -V for more detail)
+#~ 
+#~ $ perl -MDBI -e 'warn $DBI::VERSION'
+#~ 1.633 at -e line 1.
+#~ $ perl -MDBD::mysql -e 'warn $DBD::mysql::VERSION'
+#~ 4.025 at -e line 1.
+
+#scp -r 
+
+mkdir ~/src
+cd ~/src/
+unzip SOFTWARE/bioperl-release-1-2-3.zip -d ~/src/
+mv ~/src/bioperl-live-bioperl-release-1-2-3/ ~/src/bioperl-1.2.3
+tar zxf SOFTWARE/ensembl-api.tar.gz -C ~/src/
+
+# Add the following lines to .profile and refresh .profile
+#~ $ nano ~/.profile
+#~ export PERL5LIB=$HOME/src/ensembl/modules:$PERL5LIB
+#~ export PERL5LIB=$HOME/src/ensembl-variation/modules:$PERL5LIB
+#~ export PERL5LIB=$HOME/src/ensembl-compara/modules:$PERL5LIB
+#~ export PERL5LIB=$HOME/src/ensembl-funcgen/modules:$PERL5LIB
+#~ export PERL5LIB=$HOME/src/ensembl-tools/modules:$PERL5LIB
+#~ export PERL5LIB=$HOME/src/bioperl-1.2.3/:$PERL5LIB
+#~ $ . ~/.profile
+
+# Test
+
+#~ perl ~/src/ensembl/misc-scripts/ping_ensembl.pl 
+#~ 
+#~ Installation is good. Connection to Ensembl works and you can query the human core database
+
 
 # Decompress the VEP.zip file
 
@@ -63,8 +121,6 @@ perl SOFTWARE/ensembl-tools-release-75/scripts/variant_effect_predictor/INSTALL.
 echo obtaining the human genome version GRCh37.75 for VEP
 
 scp -r /home/manueltar/Desktop/Proyecto_NutVar2/homo_sapiens_vep_75.tar.gz SOFTWARE/
-
-# mkdir -p SOFTWARE/{vep/{tmp/{homo_sapiens/{75,},},},}
 
 mkdir SOFTWARE/vep/
 mv SOFTWARE/vep/ SOFTWARE/.vep
@@ -83,5 +139,4 @@ rm SOFTWARE/homo_sapiens_vep_75.tar.gz
 
 mkdir data/input/
 mkdir data/intermediate/
-
 

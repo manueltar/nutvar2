@@ -1,8 +1,4 @@
 
-# This line creates the subdirectory data/intermediate
-
-mkdir data/input/
-mkdir data/intermediate/
 
 # This line runs snpEff with example file
 
