@@ -43,7 +43,7 @@ mv snpEff_summary.csv {datadir1}/snpEff_summary.csv
 #Parsing the results of snpEff
 
 # ISSUE There are two more scripts in this folder /bin/snpEff/ 24 and 25 ---> Erase them?
-
+exit
 echo "Parsing Snpeff results"
 
 perl ${Softwaredir}/${bindir2}/24_snpEff_parser_def_minus_heather_2.0.pl {datadir1}/vcfinput_mr_eff.vcf {datadir1}/out_snpeff_parsed.txt
@@ -63,7 +63,7 @@ echo "Parsing VEP results"
 perl ${Softwaredir}/${bindir3}/24_VEP_parser_def_minus_heather_variante_def.pl {datadir1}/vcfinput_mr_vep.vcf {datadir1}/out_vep_parsed.txt 
 
 
-exit
+
 
 ### HERE TO BYPASS THE SNPEFF ASSESSEMENT AND PARSE AN EXTERNAL SNPEFF.out
 perl ${Softwaredir}/${bindir}/Snpeff_parser.pl ${vcfinput} >${workingdir}/vcfinput_snpeffout_Snpeff_parsed.txt
