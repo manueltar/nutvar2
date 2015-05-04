@@ -1,3 +1,6 @@
+
+# Define time and stamp it in every result directory
+
 echo `ulimit -a`
 
 Softwaredir=$1
@@ -6,26 +9,61 @@ output=$3
 workingdir=$4
 
 snpEFFdir=snpEff
+VEPdir=ensembl-tools-release-75/scripts/variant_effect_predictor/
 
-bindir=bin
-datadir=data
+bindir1=bin/shared
+bindir2=bin/snpEff
+bindir3=bin/VEP
+datadir1=data/intermediate
+datadir2=data/final
 
 mypwd=$(pwd)
 
+# Open file and eliminate header lines
 
-# NOTICE
-# The GRCh37.75 database for snpEff and ENSEMBL human 37.75 for VEP are installed by default with the install.sh script
-# java -jar snpEff.jar download -v GRCh37.75
-# cd ${Softwaredir}/${snpEFFdir}
+cat ${vcfinput} | perl -ne 'chomp;unless($_=~/^##/){$_=~s/^[Cc]hr//;print "$_\n";}' ${workingdir}/vcfinput.vcf 
+
+# Run the minimal representation script
+
+perl ${Softwaredir}/${bindir1}/2_Script_minimal_representation_vcf_7.0.pl ${workingdir}/vcfinput.vcf ${datadir1}/vcfinput_mr.vcf
+
+# Ask the user whether she wants to run SnpEff, VEP or both
+
+# NOTICE GRCh37.75 database for snpEff and the ENSEMBL version of genome 37.75 are installed through the install script
+
+# Run SnpEff
 
 echo "Runing Snpeff"
 
-## cat ${vcfinput} | perl -ne 'chomp;unless($_=~/^##/){$_=~s/^[Cc]hr//;print "$_\n";}' >${workingdir}/vcfinput.vcf
-## java -Xmx4g -jar ${Softwaredir}/${snpEFFdir}/snpEff.jar eff -c ${Softwaredir}/${snpEFFdir}/snpEff.config -v GRCh37.71 -noLog ${workingdir}/vcfinput.vcf >${workingdir}/vcfinput_snpeffout.vcf
+java -Xmx4g -jar ${Softwaredir}/${snpEFFdir}/snpEff.jar eff -c ${Softwaredir}/${snpEFFdir}/snpEff.config$ -v GRCh37.75 -lof -csvStats -nextProt -sequenceOntology {datadir1}/vcfinput_mr.vcf > {datadir1}/vcfinput_mr_eff.vcf
 
-# java -Xmx4g -jar ${Softwaredir}/${snpEFFdir}/snpEff.jar eff -c ${Softwaredir}/${snpEFFdir}/snpEff.config -v GRCh37.71 -noLog ${vcfinput} >${workingdir}/vcfinput_snpeffout.vcf
+mv snpEff_genes.txt {datadir1}/snpEff_genes.txt
+mv snpEff_summary.csv {datadir1}/snpEff_summary.csv
 
-# perl ${Softwaredir}/${bindir}/Snpeff_parser.pl ${workingdir}/vcfinput_snpeffout.vcf >${workingdir}/vcfinput_snpeffout_Snpeff_parsed.txt
+#Parsing the results of snpEff
+
+# ISSUE There are two more scripts in this folder /bin/snpEff/ 24 and 25 ---> Erase them?
+
+echo "Parsing Snpeff results"
+
+perl ${Softwaredir}/${bindir2}/24_snpEff_parser_def_minus_heather_2.0.pl {datadir1}/vcfinput_mr_eff.vcf {datadir1}/out_snpeff_parsed.txt
+
+# Run VEP
+
+echo "Runing VEP"
+
+perl ${Softwaredir}/${VEPdir}/variant_effect_predictor.pl -i {datadir1}/vcfinput_mr.vcf --offline --output_file {datadir1}/vcfinput_mr_vep.vcf --everything --vcf --cache --dir ${Softwaredir}/.vep/
+
+#Parsing the results of VEP
+
+# ISSUE There are two more scripts in this folder /bin/VEP/ versions of 24 ---> Erase them?
+
+echo "Parsing VEP results"
+
+perl ${Softwaredir}/${bindir3}/24_VEP_parser_def_minus_heather_variante_def.pl {datadir1}/vcfinput_mr_vep.vcf {datadir1}/out_vep_parsed.txt 
+
+
+exit
 
 ### HERE TO BYPASS THE SNPEFF ASSESSEMENT AND PARSE AN EXTERNAL SNPEFF.out
 perl ${Softwaredir}/${bindir}/Snpeff_parser.pl ${vcfinput} >${workingdir}/vcfinput_snpeffout_Snpeff_parsed.txt
