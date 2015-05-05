@@ -15,7 +15,9 @@ bindir1=bin/shared
 bindir2=bin/snpEff
 bindir3=bin/VEP
 datadir1=data/intermediate
-datadir2=data/final
+datadir2=data/build_tables
+datadir3=data/external
+datadir4=data/final
 
 mypwd=$(pwd)
 
@@ -43,7 +45,7 @@ mv snpEff_summary.csv {datadir1}/snpEff_summary.csv
 #Parsing the results of snpEff
 
 # ISSUE There are two more scripts in this folder /bin/snpEff/ 24 and 25 ---> Erase them?
-exit
+
 echo "Parsing Snpeff results"
 
 perl ${Softwaredir}/${bindir2}/24_snpEff_parser_def_minus_heather_2.0.pl {datadir1}/vcfinput_mr_eff.vcf {datadir1}/out_snpeff_parsed.txt
@@ -62,13 +64,81 @@ echo "Parsing VEP results"
 
 perl ${Softwaredir}/${bindir3}/24_VEP_parser_def_minus_heather_variante_def.pl {datadir1}/vcfinput_mr_vep.vcf {datadir1}/out_vep_parsed.txt 
 
+echo "snpEff and VEP done. Runing NUTVAR perl scripts for snpEff results"
 
+perl ${Softwaredir}/${bindir1}/25_Downstream_frameshift_API_independent_5.0.pl {datadir1}/out_snpeff_parsed.txt {datadir2}/CDS_genomic_coordinates_full_compresed.txt {datadir1}/snpeff_derived_PTCS_API_independent.txt
 
+perl ${Softwaredir}/${bindir1}/26_NEW_EXTRA_key_%_sequence_2.0.pl {datadir1}/out_snpeff_parsed.txt {datadir2}/ENST_table_full_condensed.txt {datadir1}/snpeff_percentage.txt
 
-### HERE TO BYPASS THE SNPEFF ASSESSEMENT AND PARSE AN EXTERNAL SNPEFF.out
-perl ${Softwaredir}/${bindir}/Snpeff_parser.pl ${vcfinput} >${workingdir}/vcfinput_snpeffout_Snpeff_parsed.txt
+perl ${Softwaredir}/${bindir1}/27_key_NMD_5.0_3.0.pl {datadir1}/out_snpeff_parsed.txt {datadir2}/NMD_table.txt {datadir2}/ENST_table_full_condensed.txt {datadir1}/snpeff_NMD.txt
 
-echo "Snpeff done. Runing NUTVAR perl scripts"
+perl ${Softwaredir}/${bindir1}/32_key_PROTEINS_8.0_GLOBAL_3.0.pl {datadir1}/out_snpeff_parsed.txt {datadir2}/ENST_table_full_condensed.txt {datadir2}/ALL_ISOFORMS_PROTEIN_table_full.txt {datadir1}/snpeff_detailed_ProtAndSite_Pre_step.txt
+
+sort -k1,1 -k2,2 -k3,3 -k4,4 -k5,5 -k6,6 -k7,7 -k8,8 {datadir1}/snpeff_detailed_ProtAndSite_Pre_step.txt > {datadir1}/snpeff_detailed_ProtAndSite_Pre_step_ordered.txt
+
+perl ${Softwaredir}/${bindir1}/32_key_PROTEINS_8.0_GLOBAL_ParteII.pl {datadir1}/snpeff_detailed_ProtAndSite_Pre_step_ordered.txt {datadir1}/snpeff_detailed_ProtAndSite_Post_step.txt
+
+perl ${Softwaredir}/${bindir1}/32_key_PROTEINS_8.0_GLOBAL_3.0.pl {datadir1}/out_snpeff_parsed.txt {datadir2}/ENST_table_full_condensed.txt {datadir2}/ALL_ISOFORMS_DOMAIN_table_full.txt {datadir1}/snpeff_DOMAINS_Pre_step.txt
+
+sort -k1,1 -k2,2 -k3,3 -k4,4 -k5,5 -k6,6 -k7,7 -k8,8 {datadir1}/snpeff_DOMAINS_Pre_step.txt > {datadir1}/snpeff_DOMAINS_Pre_step_ordered.txt
+
+perl ${Softwaredir}/${bindir1}/32_key_PROTEINS_8.0_GLOBAL_ParteII.pl {datadir1}/snpeff_DOMAINS_Pre_step_ordered.txt {datadir1}/snpeff_DOMAINS_Post_step.txt
+
+perl ${Softwaredir}/${bindir1}/27_key_NMD_5.0_DERIVED_STOPS_2.0.pl {datadir1}/snpeff_derived_PTCS_API_independent.txt {datadir1}/out_snpeff_parsed.txt {datadir2}/NMD_table.txt {datadir2}/ENST_table_full_condensed.txt {datadir1}/snpeff_derived_NMD.txt
+
+perl ${Softwaredir}/${bindir1}/38_global_feature_table_1_4_paralell.pl {datadir1}/snpeff_NMD.txt {datadir1}/snpeff_derived_NMD.txt {datadir1}/snpeff_detailed_ProtAndSite_Post_step.txt {datadir1}/snpeff_DOMAINS_Post_step.txt {datadir1}/snpeff_percentage.txt {datadir1}/snpeff_first_table.txt
+
+perl ${Softwaredir}/${bindir1}/40_tabla_PEJMAN_16_def_2.0.pl {datadir1}/snpeff_first_table.txt {datadir1}/snpeff_NMD.txt {datadir1}/snpeff_derived_NMD.txt {datadir2}/gtf_output_ENST.txt {datadir2}/gtf_output_ENSG.txt {datadir2}/ENST_table_full_condensed.txt {datadir3}/appris_principal_isoform_gencode_19_15_10_2014.txt {datadir3}/Pervasive.txt {datadir1}/Matrix_snpeff.txt
+
+perl ${Softwaredir}/${bindir1}/41_CCDS_collapser_3.0.pl {datadir1}/gtf_tabladef_sorted_by_SYMBOL.txt {datadir1}/snpeff_NMD.txt {datadir1}/snpeff_NMD_CCDS.txt {datadir1}/snpeff_derived_NMD.txt {datadir1}/snpeff_derived_NMD_CCDS.txt {datadir2}/gtf_output_ENSG.txt {datadir2}/gtf_output_ENSG_CCDS.txt {datadir2}/gtf_output_ENST.txt {datadir2}/gtf_output_ENST_CCDS.txt {datadir2}/ENST_table_full_condensed.txt {datadir2}/ENST_table_full_condensed_CCDS.txt {datadir3}/appris_principal_isoform_gencode_19_15_10_2014.txt {datadir3}/appris_principal_isoform_gencode_19_15_10_2014_CCDS.txt {datadir3}/Pervasive.txt {datadir3}/Pervasive_CCDS.txt {datadir1}/snpeff_first_table.txt {datadir1}/snpeff_first_table_CCDS.txt
+
+perl ${Softwaredir}/${bindir1}/42_tabla_PEJMAN_15.0_version_paralel_4.0.pl {datadir1}/snpeff_first_table_CCDS.txt {datadir1}/snpeff_NMD_CCDS.txt {datadir1}/snpeff_derived_NMD_CCDS.txt {datadir2}/gtf_output_ENST_CCDS.txt {datadir2}/gtf_output_ENSG_CCDS.txt {datadir2}/ENST_table_full_condensed_CCDS.txt {datadir3}/appris_principal_isoform_gencode_19_15_10_2014_CCDS.txt {datadir3}/Pervasive_CCDS.txt {datadir1}/Matrix_snpeff_CCDS.txt
+
+perl ${Softwaredir}/${bindir1}/53BIS_Fuse_Matrix\&Gene_based.pl {datadir1}/Matrix_snpeff.txt {datadir3}/pRDG2.txt {datadir3}/Genes_AllInnateImmunity.txt {datadir3}/Genes_Antiviral.txt {datadir3}/Genes_ISGs.txt {datadir3}/Genes_OMIMrecessive.txt {datadir3}/RVIS2.txt {datadir4}/Matrix_snpeff_added_gene_based_scores.txt
+
+perl ${Softwaredir}/${bindir1}/53BIS_Fuse_Matrix\&Gene_based.pl {datadir1}/Matrix_snpeff_CCDS.txt {datadir3}/pRDG2.txt {datadir3}/Genes_AllInnateImmunity.txt {datadir3}/Genes_Antiviral.txt {datadir3}/Genes_ISGs.txt {datadir3}/Genes_OMIMrecessive.txt {datadir3}/RVIS2.txt {datadir4}/Matrix_snpeff_CCDS_added_gene_based_scores.txt
+
+echo "snpEff data matrix generated"
+
+cho "Runing NUTVAR perl scripts for VEP results"
+
+perl ${Softwaredir}/${bindir1}/25_Downstream_frameshift_API_independent_5.0.pl {datadir1}/out_vep_parsed.txt {datadir2}/CDS_genomic_coordinates_full_compresed.txt {datadir1}/vep_derived_PTCS_API_independent.txt
+
+perl ${Softwaredir}/${bindir1}/26_NEW_EXTRA_key_%_sequence_2.0.pl {datadir1}/out_vep_parsed.txt {datadir2}/ENST_table_full_condensed.txt {datadir1}/vep_percentage.txt
+
+perl ${Softwaredir}/${bindir1}/27_key_NMD_5.0_3.0.pl {datadir1}/out_vep_parsed.txt {datadir2}/NMD_table.txt {datadir2}/ENST_table_full_condensed.txt {datadir1}/vep_NMD.txt
+
+perl ${Softwaredir}/${bindir1}/32_key_PROTEINS_8.0_GLOBAL_3.0.pl {datadir1}/out_vep_parsed.txt {datadir2}/ENST_table_full_condensed.txt {datadir2}/ALL_ISOFORMS_PROTEIN_table_full.txt {datadir1}/vep_detailed_ProtAndSite_Pre_step.txt
+
+sort -k1,1 -k2,2 -k3,3 -k4,4 -k5,5 -k6,6 -k7,7 -k8,8 {datadir1}/vep_detailed_ProtAndSite_Pre_step.txt > {datadir1}/vep_detailed_ProtAndSite_Pre_step_ordered.txt
+
+perl ${Softwaredir}/${bindir1}/32_key_PROTEINS_8.0_GLOBAL_ParteII.pl {datadir1}/vep_detailed_ProtAndSite_Pre_step_ordered.txt {datadir1}/vep_detailed_ProtAndSite_Post_step.txt
+
+perl ${Softwaredir}/${bindir1}/32_key_PROTEINS_8.0_GLOBAL_3.0.pl {datadir1}/out_vep_parsed.txt {datadir2}/ENST_table_full_condensed.txt {datadir2}/ALL_ISOFORMS_DOMAIN_table_full.txt {datadir1}/vep_DOMAINS_Pre_step.txt
+
+sort -k1,1 -k2,2 -k3,3 -k4,4 -k5,5 -k6,6 -k7,7 -k8,8 {datadir1}/vep_DOMAINS_Pre_step.txt > {datadir1}/vep_DOMAINS_Pre_step_ordered.txt
+
+perl ${Softwaredir}/${bindir1}/32_key_PROTEINS_8.0_GLOBAL_ParteII.pl {datadir1}/vep_DOMAINS_Pre_step_ordered.txt {datadir1}/vep_DOMAINS_Post_step.txt
+
+perl ${Softwaredir}/${bindir1}/27_key_NMD_5.0_DERIVED_STOPS_2.0.pl {datadir1}/vep_derived_PTCS_API_independent.txt {datadir1}/out_vep_parsed.txt {datadir2}/NMD_table.txt {datadir2}/ENST_table_full_condensed.txt {datadir1}/vep_derived_NMD.txt
+
+perl ${Softwaredir}/${bindir1}/38_global_feature_table_1_4_paralell.pl {datadir1}/vep_NMD.txt {datadir1}/vep_derived_NMD.txt {datadir1}/vep_detailed_ProtAndSite_Post_step.txt {datadir1}/vep_DOMAINS_Post_step.txt {datadir1}/vep_percentage.txt {datadir1}/vep_first_table.txt
+
+perl ${Softwaredir}/${bindir1}/40_tabla_PEJMAN_16_def_2.0.pl {datadir1}/vep_first_table.txt {datadir1}/vep_NMD.txt {datadir1}/vep_derived_NMD.txt {datadir2}/gtf_output_ENST.txt {datadir2}/gtf_output_ENSG.txt {datadir2}/ENST_table_full_condensed.txt {datadir3}/appris_principal_isoform_gencode_19_15_10_2014.txt {datadir3}/Pervasive.txt {datadir1}/Matrix_vep.txt
+
+perl ${Softwaredir}/${bindir1}/41_CCDS_collapser_3.0.pl {datadir1}/gtf_tabladef_sorted_by_SYMBOL.txt {datadir1}/vep_NMD.txt {datadir1}/vep_NMD_CCDS.txt {datadir1}/vep_derived_NMD.txt {datadir1}/vep_derived_NMD_CCDS.txt {datadir2}/gtf_output_ENSG.txt {datadir2}/gtf_output_ENSG_CCDS.txt {datadir2}/gtf_output_ENST.txt {datadir2}/gtf_output_ENST_CCDS.txt {datadir2}/ENST_table_full_condensed.txt {datadir2}/ENST_table_full_condensed_CCDS.txt {datadir3}/appris_principal_isoform_gencode_19_15_10_2014.txt {datadir3}/appris_principal_isoform_gencode_19_15_10_2014_CCDS.txt {datadir3}/Pervasive.txt {datadir3}/Pervasive_CCDS.txt {datadir1}/vep_first_table.txt {datadir1}/vep_first_table_CCDS.txt
+
+perl ${Softwaredir}/${bindir1}/42_tabla_PEJMAN_15.0_version_paralel_4.0.pl {datadir1}/vep_first_table_CCDS.txt {datadir1}/vep_NMD_CCDS.txt {datadir1}/vep_derived_NMD_CCDS.txt {datadir2}/gtf_output_ENST_CCDS.txt {datadir2}/gtf_output_ENSG_CCDS.txt {datadir2}/ENST_table_full_condensed_CCDS.txt {datadir3}/appris_principal_isoform_gencode_19_15_10_2014_CCDS.txt {datadir3}/Pervasive_CCDS.txt {datadir1}/Matrix_vep_CCDS.txt
+
+perl ${Softwaredir}/${bindir1}/53BIS_Fuse_Matrix\&Gene_based.pl {datadir1}/Matrix_vep.txt {datadir3}/pRDG2.txt {datadir3}/Genes_AllInnateImmunity.txt {datadir3}/Genes_Antiviral.txt {datadir3}/Genes_ISGs.txt {datadir3}/Genes_OMIMrecessive.txt {datadir3}/RVIS2.txt {datadir4}/Matrix_vep_added_gene_based_scores.txt
+
+perl ${Softwaredir}/${bindir1}/53BIS_Fuse_Matrix\&Gene_based.pl {datadir1}/Matrix_vep_CCDS.txt {datadir3}/pRDG2.txt {datadir3}/Genes_AllInnateImmunity.txt {datadir3}/Genes_Antiviral.txt {datadir3}/Genes_ISGs.txt {datadir3}/Genes_OMIMrecessive.txt {datadir3}/RVIS2.txt {datadir4}/Matrix_vep_CCDS_added_gene_based_scores.txt
+
+echo "VEP data matrix generated"
+
+exit
+##########################################################################################################################################################
+
 
 # perl ${Softwaredir}/${bindir}/Mapping2CCDS_plusSeqFeatures.pl ${Softwaredir}/${datadir} ${vcfinput} >${workingdir}/mapped2CCDS_plusSeqFeatures.txt
 
