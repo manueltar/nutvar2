@@ -67,14 +67,14 @@ while (my $line = <INPUT>)
 				$line=~/^#(.+)/;
 				my @tmp_HI0 = split ("\t",$1);
 				#~ my $string=join("*",@tmp_HI0);
-				#~ print "The array is $string\n";
+				#~ print OUTPUT "The array is $string\n";
 				for(my $i=0;$i<scalar(@tmp_HI0);$i++)
 										
 				{
 					$HI0{$tmp_HI0[$i]}=$i;
 					$IH0{$i}=$tmp_HI0[$i];
-					#print "$HI0{$tmp_HI0[$i]} \n";
-					#print "$IH0{$i} \n";
+					#print OUTPUT "$HI0{$tmp_HI0[$i]} \n";
+					#print OUTPUT "$IH0{$i} \n";
 				}
 			}
 
@@ -88,10 +88,10 @@ while (my $line = <INPUT>)
 				my $trim="NaN";
 				my $pos_trimmed="NaN";
 
-				#print "$line\n";
+				#print OUTPUT "$line\n";
 				my @tmp= split(/\t/,$line);
 				#~ my $string=join("*",@tmp);
-				#~ print "The array is $string\n";
+				#~ print OUTPUT "The array is $string\n";
 				
 				my $CHROM="NaN";if (exists($HI0{"CHROM"})){$CHROM=$tmp[$HI0{"CHROM"}];}unless(defined($CHROM)){$CHROM="NaNein"; print "ERROR in CHROM\n";}
 				my $POS="NaN";if (exists($HI0{"POS"})){$POS=$tmp[$HI0{"POS"}];}unless(defined($POS)){$POS="NaNein"; print "ERROR in POS\n";}
@@ -104,8 +104,8 @@ while (my $line = <INPUT>)
 				my $FORMAT="NaN";if (exists($HI0{"FORMAT"})){$FORMAT=$tmp[$HI0{"FORMAT"}];}unless(defined($FORMAT)){$FORMAT="NaNein"; print "ERROR in FORMAT\n";}
 				my $NA12878="NaN";if (exists($HI0{"NA12878"})){$NA12878=$tmp[$HI0{"NA12878"}];}unless(defined($NA12878)){$NA12878="NaNein"; print "ERROR in NA12878\n";}
 				
-				#~ print "$CHROM\t$POS\t$ID\t$REF\t$ALT\n";
-				#~ print "La otra línea es:$QUAL\t$FILTER\t$INFO\t$FORMAT\t$NA12878\n";
+				#~ print OUTPUT "$CHROM\t$POS\t$ID\t$REF\t$ALT\n";
+				#~ print OUTPUT "La otra línea es:$QUAL\t$FILTER\t$INFO\t$FORMAT\t$NA12878\n";
 				#~ exit;
 				
 				# We declare an array to store possible alternative allele joint calls
@@ -191,29 +191,29 @@ while (my $line = <INPUT>)
 						
 						if (length($REF_tok)==1 && length($ALT_tok)==1)
 								{
-										#~ print "El alelo partido por comas es y que cumple las NOMODIF es:$ALT_tok\n";
-										# We print a label of it being left untouched and add it to info field
+										#~ print OUTPUT "El alelo partido por comas es y que cumple las NOMODIF es:$ALT_tok\n";
+										# We print OUTPUT a label of it being left untouched and add it to info field
 										$trim= "No_modification_to_get_minimal_representation";
 										my $string=join(";",$INFO_tok,$trim);
-										# We print the line in vcf format in the output file
+										# We print OUTPUT the line in vcf format in the output file
 										print OUTPUT "$CHROM_tok\t$POS_tok\t$ID_tok\t$REF_tok\t$ALT_tok\t$QUAL_tok\t$FILTER_tok\t$string\n";	
 								}
 						elsif (length($REF_tok) == 1 && length($ALT_tok) != 1)
 								{
-										#~ print "El alelo partido por comas es y que cumple las NOMODIF es:$ALT_tok\n";
-										# We print a label of it being left untouched and add it to info field
+										#~ print OUTPUT "El alelo partido por comas es y que cumple las NOMODIF es:$ALT_tok\n";
+										# We print OUTPUT a label of it being left untouched and add it to info field
 										$trim= "No_modification_to_get_minimal_representation";
 										my $string=join(";",$INFO_tok,$trim);
-										# We print the line in vcf format in the output file
+										# We print OUTPUT the line in vcf format in the output file
 										print OUTPUT "$CHROM_tok\t$POS_tok\t$ID_tok\t$REF_tok\t$ALT_tok\t$QUAL_tok\t$FILTER_tok\t$string\n";
 								}
 						elsif (length($REF_tok) != 1 && length($ALT_tok) == 1)
 								{
-										#~ print "El alelo partido por comas es y que cumple las NOMODIF es:$ALT_tok\n";
-										# We print a label of it being left untouched and add it to info field
+										#~ print OUTPUT "El alelo partido por comas es y que cumple las NOMODIF es:$ALT_tok\n";
+										# We print OUTPUT a label of it being left untouched and add it to info field
 										$trim= "No_modification_to_get_minimal_representation";
 										my $string=join(";",$INFO_tok,$trim);
-										# We print the line in vcf format in the output file
+										# We print OUTPUT the line in vcf format in the output file
 										print OUTPUT "$CHROM_tok\t$POS_tok\t$ID_tok\t$REF_tok\t$ALT_tok\t$QUAL_tok\t$FILTER_tok\t$string\n";
 								}
 								
@@ -222,11 +222,11 @@ while (my $line = <INPUT>)
 								{
 										##	We split by letters the components of REF_tok and ALT
 
-										#~ print "$REF_tok\t$ALT_tok\n";
+										#~ print OUTPUT "$REF_tok\t$ALT_tok\n";
 										my @REF_tok_tmp=split('',$REF_tok);
-										#~ print "@REF_tok_tmp\n";
+										#~ print OUTPUT "@REF_tok_tmp\n";
 										my @ALT_tmp=split('',$ALT_tok);
-										#~ print "@ALT_tmp\n";
+										#~ print OUTPUT "@ALT_tmp\n";
 										$POS_trimmed=$POS_tok;
 										
 										# Conditions of trimming downstream; same element in last position of REF_tok and ALT and REF_tok and ALT more than one in length. 
@@ -234,7 +234,7 @@ while (my $line = <INPUT>)
 										while (($REF_tok_tmp[scalar(@REF_tok_tmp)-1] eq $ALT_tmp[scalar(@ALT_tmp)-1] && scalar(@REF_tok_tmp)>1 && scalar(@ALT_tmp)>1))
 											{
 												## Extract last element of the array.
-												#print "Hello_world_1\n";
+												#print OUTPUT "Hello_world_1\n";
 												pop (@REF_tok_tmp);
 												pop (@ALT_tmp);
 											}
@@ -243,12 +243,12 @@ while (my $line = <INPUT>)
 										
 										while ($REF_tok_tmp[0] eq $ALT_tmp[0] && scalar(@REF_tok_tmp)>1 && scalar(@ALT_tmp)>1)
 											{
-												#print "Hello_world_2\n";
+												#print OUTPUT "Hello_world_2\n";
 												shift (@REF_tok_tmp);
 												shift (@ALT_tmp);
 												$POS_trimmed++;
-												#print "$POS_tok\n";
-												#print "$POS_tok\n";
+												#print OUTPUT "$POS_tok\n";
+												#print OUTPUT "$POS_tok\n";
 											}
 										
 										# Once the trimming has been completed we recompose whats been left in each array
@@ -256,10 +256,10 @@ while (my $line = <INPUT>)
 										$REF_post_trimming=join('',@REF_tok_tmp);
 										$ALT_post_trimming=join('',@ALT_tmp);
 										
-										# We print a label of it having been modified and add it to info field
+										# We print OUTPUT a label of it having been modified and add it to info field
 										$trim= "This_line_has_been_modified_to_get_minimal_representation";
 										my $string=join(";",$INFO_tok,$trim);
-										# We print the line in vcf format in the output file
+										# We print OUTPUT the line in vcf format in the output file
 										print OUTPUT "$CHROM_tok\t$POS_tok\t$ID_tok\t$REF_tok\t$ALT_tok\t$QUAL_tok\t$FILTER_tok\t$string\n";
 								}
 					}
@@ -277,7 +277,9 @@ while (my $line = <INPUT>)
 			}
 	}#WHILE
 		
-}else {print "unable to open $input or $output_minimal_representation\n";}
+}else {print "unable to open $output_minimal_representation \n";}
+	
+##or $output_minimal_representation\n";}
 
 $time='['. timestamp(). ']'."\n";
 print "THE END:$time\n";
