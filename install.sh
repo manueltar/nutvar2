@@ -15,7 +15,7 @@ rm SOFTWARE/snpEff_v3_6_core.zip
 # The genome files are obtained from ELSEWHERE (#ISSUE 1.1)
 
 echo obtaining the human genome version GRCh37.75
-scp -r /home/manueltar/Dropbox/Proyecto_NutVar2 snpEff_v3_6_GRCh37.75.zip SOFTWARE/snpEff
+scp -r /home/manueltar/Dropbox/Proyecto_NutVar2/snpEff_v3_6_GRCh37.75.zip SOFTWARE/snpEff
 unzip SOFTWARE/snpEff/snpEff_v3_6_GRCh37.75.zip -d ./SOFTWARE/snpEff/
 rm SOFTWARE/snpEff/snpEff_v3_6_GRCh37.75.zip
 
