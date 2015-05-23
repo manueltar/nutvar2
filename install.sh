@@ -40,6 +40,8 @@ rm SOFTWARE/snpEff/snpEff_v3_6_GRCh37.75.zip
 
 #~ sudo apt-get install mysql-server
 #~ 
+#~ sudo apt-get install libmysqlclient-dev
+
 #~ sudo service mysql restart
 
 # check if mysql is running
@@ -85,11 +87,10 @@ rm SOFTWARE/snpEff/snpEff_v3_6_GRCh37.75.zip
 
 #scp -r 
 
-mkdir ~/src
-cd ~/src/
-unzip SOFTWARE/bioperl-release-1-2-3.zip -d ~/src/
-mv ~/src/bioperl-live-bioperl-release-1-2-3/ ~/src/bioperl-1.2.3
-tar zxf SOFTWARE/ensembl-api.tar.gz -C ~/src/
+#~ mkdir ~/src
+#~ unzip SOFTWARE/bioperl-release-1-2-3.zip -d ~/src/
+#~ mv ~/src/bioperl-live-bioperl-release-1-2-3/ ~/src/bioperl-1.2.3
+#~ tar zxf SOFTWARE/ensembl-api.tar.gz -C ~/src/
 
 # Add the following lines to .profile and refresh .profile
 #~ $ nano ~/.profile
@@ -114,7 +115,7 @@ unzip SOFTWARE/ensembl-tools-release-75.zip -d ./SOFTWARE/
 echo INSTALLING VEP
 perl SOFTWARE/ensembl-tools-release-75/scripts/variant_effect_predictor/INSTALL.pl
 
-# printf n/n (#ISSUE 2)
+# printf n/n/n (#ISSUE 2)
 
 # The genome files are obtained from ELSEWHERE (#ISSUE 1.2)
 
