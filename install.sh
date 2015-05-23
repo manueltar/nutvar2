@@ -15,7 +15,7 @@ rm SOFTWARE/snpEff_v3_6_core.zip
 # The genome files are obtained from ELSEWHERE (#ISSUE 1.1)
 
 echo obtaining the human genome version GRCh37.75
-scp -r /home/manueltar/Desktop/Proyecto_NutVar2/snpEff_v3_6_GRCh37.75.zip SOFTWARE/snpEff
+scp -r /home/manueltar/Dropbox/Proyecto_NutVar2 snpEff_v3_6_GRCh37.75.zip SOFTWARE/snpEff
 unzip SOFTWARE/snpEff/snpEff_v3_6_GRCh37.75.zip -d ./SOFTWARE/snpEff/
 rm SOFTWARE/snpEff/snpEff_v3_6_GRCh37.75.zip
 
@@ -26,29 +26,29 @@ rm SOFTWARE/snpEff/snpEff_v3_6_GRCh37.75.zip
 # First, install the module DBI
 
 # A zip file of DBI-1.633 is included in /SOFTWARE
-echo THE PERL-DBI MODULE
-tar -xvzf SOFTWARE/DBI-1.633.tar.gz -C SOFTWARE/
-cd SOFTWARE/DBI-1.633/
-perl Makefile.PL
-make
-make test
-sudo make install
-cd ../..
-rm SOFTWARE/DBI-1.633.tar.gz
+#~ echo THE PERL-DBI MODULE
+#~ tar -xvzf SOFTWARE/DBI-1.633.tar.gz -C SOFTWARE/
+#~ cd SOFTWARE/DBI-1.633/
+#~ perl Makefile.PL
+#~ make
+#~ make test
+#~ sudo make install
+#~ cd ../..
+#~ rm SOFTWARE/DBI-1.633.tar.gz
 
 # Second, install and configure mysql in case you don't have it
 
-sudo apt-get install mysql-server
-
-sudo service mysql restart
+#~ sudo apt-get install mysql-server
+#~ 
+#~ sudo service mysql restart
 
 # check if mysql is running
 
-sudo netstat -tap | grep mysql
+#~ sudo netstat -tap | grep mysql
 
 # Set password
 
-sudo dpkg-reconfigure mysql-server-5.5
+#~ sudo dpkg-reconfigure mysql-server-5.5
 
 # To test the pass
 
@@ -58,15 +58,15 @@ sudo dpkg-reconfigure mysql-server-5.5
 # Third, install the module DBD-mysql
 
 
-echo THE DBD-mysql MODULE
-tar -xvzf SOFTWARE/DBD-mysql-4.031.tar.gz -C SOFTWARE/
-cd SOFTWARE/DBD-mysql-4.031/
-perl Makefile.PL
-make
-make test
-sudo make install
-cd ../..
-rm SOFTWARE/DBD-mysql-4.031.tar.gz
+#~ echo THE DBD-mysql MODULE
+#~ tar -xvzf SOFTWARE/DBD-mysql-4.031.tar.gz -C SOFTWARE/
+#~ cd SOFTWARE/DBD-mysql-4.031/
+#~ perl Makefile.PL
+#~ make
+#~ make test
+#~ sudo make install
+#~ cd ../..
+#~ rm SOFTWARE/DBD-mysql-4.031.tar.gz
 
 # Perl API
 
@@ -120,7 +120,7 @@ perl SOFTWARE/ensembl-tools-release-75/scripts/variant_effect_predictor/INSTALL.
 
 echo obtaining the human genome version GRCh37.75 for VEP
 
-scp -r /home/manueltar/Desktop/Proyecto_NutVar2/homo_sapiens_vep_75.tar.gz SOFTWARE/
+scp -r /home/manueltar/Dropbox/Proyecto_NutVar2/homo_sapiens_vep_75.tar.gz SOFTWARE/
 
 mkdir SOFTWARE/vep/
 mv SOFTWARE/vep/ SOFTWARE/.vep
