@@ -85,21 +85,26 @@ rm SOFTWARE/snpEff/snpEff_v3_6_GRCh37.75.zip
 #~ $ perl -MDBD::mysql -e 'warn $DBD::mysql::VERSION'
 #~ 4.025 at -e line 1.
 
-#scp -r 
+#scp -r
 
-#~ mkdir ~/src
-#~ unzip SOFTWARE/bioperl-release-1-2-3.zip -d ~/src/
-#~ mv ~/src/bioperl-live-bioperl-release-1-2-3/ ~/src/bioperl-1.2.3
-#~ tar zxf SOFTWARE/ensembl-api.tar.gz -C ~/src/
+# The release of BioPerl that works with VEP75 is  BioPerl-1.6.1. not 1.2.3 as explained in the video of the Ensembl API installation Tutorial
+
+mkdir ~/src
+tar zxf SOFTWARE/BioPerl-1.6.1.tar.gz -C ~/src/
+tar zxf SOFTWARE/ensembl-api.tar.gz -C ~/src/
 
 # Add the following lines to .profile and refresh .profile
+
 #~ $ nano ~/.profile
 #~ export PERL5LIB=$HOME/src/ensembl/modules:$PERL5LIB
 #~ export PERL5LIB=$HOME/src/ensembl-variation/modules:$PERL5LIB
 #~ export PERL5LIB=$HOME/src/ensembl-compara/modules:$PERL5LIB
 #~ export PERL5LIB=$HOME/src/ensembl-funcgen/modules:$PERL5LIB
 #~ export PERL5LIB=$HOME/src/ensembl-tools/modules:$PERL5LIB
-#~ export PERL5LIB=$HOME/src/bioperl-1.2.3/:$PERL5LIB
+#~ export PERL5LIB=$HOME/src/bioperl-1.6.1/:$PERL5LIB
+
+
+
 #~ $ . ~/.profile
 
 # Test

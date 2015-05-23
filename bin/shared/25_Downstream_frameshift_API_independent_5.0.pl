@@ -5,7 +5,6 @@
 use strict;
 use warnings;
 use Time::localtime;
-use Memory::Usage;
 
 my $time='['. timestamp(). ']'."\n";
 print "Start charging hash chromosomes:$time\n";
@@ -78,7 +77,7 @@ while(my $line=<INPUT1>)
 					#~  ATG	->	AC ; 3-2; $length_ALT +1
 					my $del_expand=$length_REF - $length_ALT;
 					$hash1{$CHROM}{$SYMBOL}{$ENST}{$POS}{$REF}{$ALT}{$Effect}{'DEL'}{$length_ALT}{$del_expand}=1;
-					#~ print "$CHROM\t$SYMBOL\t$POS\t$REF\t$ALT\t$Effect\t$ENST\t'DEL'\t$length_ALT\t$del_expand\n";
+					#~ print "$CHROM\t$SYMBOL\t$ENST\t$POS\t$REF\t$ALT\t$Effect\t'DEL'\t$length_ALT\t$del_expand\n";
 				}
 				
 				# If the alternative allele is longer than the reference allele -> INSERTION
@@ -87,7 +86,7 @@ while(my $line=<INPUT1>)
 				{
 					my $ins_expand=$length_ALT - $length_REF;
 					$hash1{$CHROM}{$SYMBOL}{$ENST}{$POS}{$REF}{$ALT}{$Effect}{'INS'}{$length_REF}{$ins_expand}=1;
-					#~ print "$CHROM\t$SYMBOL\t$POS\t$REF\t$ALT\t$Effect\t$ENST\t'INS'\t$length_REF\t$ins_expand\n";
+					#~ print "$CHROM\t$SYMBOL\t$ENST\t$POS\t$REF\t$ALT\t$Effect\t'INS'\t$length_REF\t$ins_expand\n";
 				}
 				
 			}
@@ -108,6 +107,7 @@ my %position_hash=();
 
 $time='['. timestamp(). ']'."\n";
 print "Start charging hash2:$time\n";
+
 
 if(open (INPUT2, $input2) && open (OUTPUT,'>'.$output))
 {
@@ -601,6 +601,7 @@ if(open (INPUT2, $input2) && open (OUTPUT,'>'.$output))
 			$ENST=$4;
 			$strand=$5;
 			#~ print ">$CHROM\t$ENSG\t$SYMBOL\t$ENST\t$strand\n";
+			#~ if(exists($hash1{$CHROM}{$SYMBOL}{$ENST})){print "Hello_world:>$CHROM\t$ENSG\t$SYMBOL\t$ENST\t$strand\n";}
 		}
 		
 		# Here we parse the sequence
@@ -645,6 +646,7 @@ if(open (INPUT2, $input2) && open (OUTPUT,'>'.$output))
 				for(my$i=0;$i<scalar(@POS_def);$i++)
 				{
 					$position_hash{$POS_def[$i]}{$seq_tmp[$i]}=1;
+					#~ print "$POS_def[$i]\t$seq_tmp[$i]\n";
 				}
 			}
 		}

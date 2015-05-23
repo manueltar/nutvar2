@@ -160,7 +160,7 @@ my %IH3_snpeff=();
 		
 		elsif ($line !~ /^#/)
 		{
-					#print "INICIO:$line_2\n";
+					#~ print "INICIO:$line\n";
 						my @tmp = split (/\t/,$line);
 					  					  
 							my $CHROM="NaN";if (exists($HI0_snpeff{"CHROM"})){$CHROM=$tmp[$HI0_snpeff{"CHROM"}];}unless(defined($CHROM)){ print "ERROR in CHROM_SNPEFF";}

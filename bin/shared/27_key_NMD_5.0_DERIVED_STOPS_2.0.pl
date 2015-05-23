@@ -4,12 +4,6 @@
 use strict;
 use warnings;
 use Time::localtime;
-use Memory::Usage;
-    
-my $mu = Memory::Usage->new();
-
-    # Record amount of memory used by current process
-$mu->record('starting work');
 
 my %hash2=();
 my %hash3=();
@@ -346,13 +340,6 @@ if (open(INPUT4, $input4))
 }else {print "impossible to open INPUT4\n";die;}
 
 
-
-
-    # Record amount in use afterwards
-$mu->record();
-
-    # Spit out a report
-$mu->dump();
 
 $time='['. timestamp(). ']'."\n";
 print "Start processing hash3:$time\n";
