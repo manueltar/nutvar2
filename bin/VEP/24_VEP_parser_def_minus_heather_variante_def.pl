@@ -248,7 +248,7 @@ my @accepted_keys=();
 													# NOT AVAILABLE W/O INTERNET CONNECTION my $HGVSp="NaN";if (exists($HI1_vep{"HGVSp"})){$HGVSp=$CSQfield_derived_tok_tmp[$HI1_vep{"HGVSp"}];if ($HGVSp!~/\w/){$HGVSp="NaN";}}else{ print "ERROR in HGVSp \n";}
 													if (exists($HI1_vep{"Feature"})){$Feature=$CSQfield_derived_tok_tmp[$HI1_vep{"Feature"}];unless (defined($Feature)){$Feature="NaN";}}else{ print "ERROR in Feature \n";}	
 													if (exists($HI1_vep{"MOTIF_NAME"})){$MOTIF_NAME=$CSQfield_derived_tok_tmp[$HI1_vep{"MOTIF_NAME"}];unless (defined($MOTIF_NAME)){$MOTIF_NAME="NaN";}}else{ print "ERROR in MOTIF_NAME \n";}
-													if (exists($HI1_vep{"CCDS"})){$CCDS=$CSQfield_derived_tok_tmp[$HI1_vep{"CCDS"}];unless (defined($CCDS)){$CCDS="NaN";print "A:$CCDS:A";}}else{ print "ERROR in CCDS\n";}	
+													if (exists($HI1_vep{"CCDS"})){$CCDS=$CSQfield_derived_tok_tmp[$HI1_vep{"CCDS"}];unless (defined($CCDS)){$CCDS="NaN";}}else{ print "ERROR in CCDS\n";}	
 													if (exists($HI1_vep{"STRAND"})){$STRAND=$CSQfield_derived_tok_tmp[$HI1_vep{"STRAND"}];unless (defined($STRAND)){$STRAND="NaN";}}else{ print "ERROR in STRAND \n";}
 													if (exists($HI1_vep{"EUR_MAF"})){$EUR_MAF=$CSQfield_derived_tok_tmp[$HI1_vep{"EUR_MAF"}];unless (defined($EUR_MAF)){$EUR_MAF="NaN";}}else{ print "ERROR in EUR_MAF \n";}
 													if (exists($HI1_vep{"EXON"})){$EXON=$CSQfield_derived_tok_tmp[$HI1_vep{"EXON"}];unless (defined($EXON)){$EXON="NaN";}}else{ print "ERROR in EXON \n";}
