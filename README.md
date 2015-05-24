@@ -117,7 +117,7 @@ Test:nutvar2-master$ ./NutVar2_VEP.sh ~/Downloads/nutvar2-master example.vcf dat
 
 nutvar2-maste$ ./NutVar2_snpEff_and_VEP.sh ~/Downloads/nutvar2-master example.vcf data/final
 
-
+ISSUE!! Create a relative path to setwd in R
 
 
 
