@@ -86,9 +86,36 @@ cd nutvar2-master
 
 # RUNNING
 
+
+# There are three different options to run NutVar2: using SnpEff as the only predictor for variant outcome, using VEP as the only predictor for variant outcome, and using both SnpEff and VEP. 
+
+**Note: VEP is a very comprehensive and informative predictor of variant outcome, but its time of execution is way larger than that of SnpEff. If VEP is going to be used in large input vcf files, cut files in smaller subfiles prior to running NutVar2.
+
+
+Issue 1 !!-> combine VEP and SnpEf results somehow in the third option
+Issue 2 !!-> Allow some MPI option specially for VEP and also intra bash script, run script 25 while running the rest of scripts
+
 cd nutvar2-master
 
-nutvar2-master>
+1- SnpEff
+
+nutvar2-master$ ./NutVar2_snpEff.sh ~/Downloads/nutvar2-master user.vcf data/final
+
+Test: nutvar2-master$ ./NutVar2_snpEff.sh ~/Downloads/nutvar2-master example.vcf data/final
+
+2- VEP
+
+nutvar2-master$ ./NutVar2_VEP.sh ~/Downloads/nutvar2-master user.vcf data/final
+
+Test:nutvar2-master$ ./NutVar2_VEP.sh ~/Downloads/nutvar2-master example.vcf data/final
+
+3- VEP and SnpEff
+
+$ ./NutVar2_snpEff_and_VEP.sh ~/Downloads/nutvar2-master example.vcf data/final
+
+
+
+
 
 
 
