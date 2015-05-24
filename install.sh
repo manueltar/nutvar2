@@ -89,9 +89,9 @@ rm SOFTWARE/snpEff/snpEff_v3_6_GRCh37.75.zip
 
 # The release of BioPerl that works with VEP75 is  BioPerl-1.6.1. not 1.2.3 as explained in the video of the Ensembl API installation Tutorial
 
-mkdir ~/src
-tar zxf SOFTWARE/BioPerl-1.6.1.tar.gz -C ~/src/
-tar zxf SOFTWARE/ensembl-api.tar.gz -C ~/src/
+#~ mkdir ~/src
+#~ tar zxf SOFTWARE/BioPerl-1.6.1.tar.gz -C ~/src/
+#~ tar zxf SOFTWARE/ensembl-api.tar.gz -C ~/src/
 
 # Add the following lines to .profile and refresh .profile
 
