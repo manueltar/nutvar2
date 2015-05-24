@@ -80,7 +80,7 @@ unzip  nutvar2-master.zip
 
 cd nutvar2-master
 
-#./install.sh
+./install.sh
 
   During the installation of ENSEMBL VEP for release 75 the user will be asked in he/she wants to install a cache version of the genome or Fasta files. In both cases the answer is NO, as the GRCh37.75 genome is provided within NuTVar2.
 
