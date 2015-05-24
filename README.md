@@ -61,7 +61,7 @@ Classifier of the potential pathogenicity of human genomic truncations
       perl -MDBD::mysql -e 'warn $DBD::mysql::VERSION'
 
  
-  # NUTVAR2 INSTALLATION
+# NUTVAR2 INSTALLATION
   
 Download the .zip files with  git clone https://github.com/manueltar/NutVar2.git
 
@@ -69,7 +69,7 @@ unzip  nutvar2-master.zip
 
 cd nutvar2-master
 
-#   Setting the path variables for ENSEMBL API.
+  #   Setting the path variables for ENSEMBL API.
     
     Export the following variables or add them to your .profile
     
@@ -80,9 +80,9 @@ cd nutvar2-master
      export PERL5LIB=$HOME/src/ensembl-tools/modules:$PERL5LIB
      export PERL5LIB=$HOME/src/bioperl-1.6.1/:$PERL5LIB
 
-# Install NutVar2
-
-./install.sh
+  # Install NutVar2
+  
+  ./install.sh
 
   During the installation of ENSEMBL VEP for release 75 the user will be asked in he/she wants to install a cache version of the genome or Fasta files. In both cases the answer is NO, as the GRCh37.75 genome is provided within NuTVar2.
   
