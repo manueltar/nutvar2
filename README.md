@@ -60,7 +60,16 @@ Classifier of the potential pathogenicity of human genomic truncations
      
       perl -MDBD::mysql -e 'warn $DBD::mysql::VERSION'
 
-    #   Setting the path variables for ENSEMBL API.
+ 
+  # NUTVAR2 INSTALLATION
+  
+Download the .zip files with  git clone https://github.com/manueltar/NutVar2.git
+
+unzip  nutvar2-master.zip
+
+cd nutvar2-master
+
+#   Setting the path variables for ENSEMBL API.
     
     Export the following variables or add them to your .profile
     
@@ -71,14 +80,7 @@ Classifier of the potential pathogenicity of human genomic truncations
      export PERL5LIB=$HOME/src/ensembl-tools/modules:$PERL5LIB
      export PERL5LIB=$HOME/src/bioperl-1.6.1/:$PERL5LIB
 
- 
-  # NUTVAR2 INSTALLATION
-  
-Download the .zip files with  git clone https://github.com/manueltar/NutVar2.git
-
-unzip  nutvar2-master.zip
-
-cd nutvar2-master
+# Install NutVar2
 
 ./install.sh
 
