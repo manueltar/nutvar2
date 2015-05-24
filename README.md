@@ -59,6 +59,10 @@ Classifier of the potential pathogenicity of human genomic truncations
      # To check the installation
      
       perl -MDBD::mysql -e 'warn $DBD::mysql::VERSION'
+      
+    #   ggplot package in R
+    
+      Rstudio> install.packages("ggplot2")
 
  
 # NUTVAR2 INSTALLATION
