@@ -97,21 +97,21 @@ Issue 2 !!-> Allow some MPI option specially for VEP and also intra bash script,
 
 cd nutvar2-master
 
-1- SnpEff
+# 1- SnpEff
 
-# nutvar2-master$ ./NutVar2_snpEff.sh ~/Downloads/nutvar2-master user.vcf data/final
+nutvar2-master$ ./NutVar2_snpEff.sh ~/Downloads/nutvar2-master user.vcf data/final
 
 Test: nutvar2-master$ ./NutVar2_snpEff.sh ~/Downloads/nutvar2-master example.vcf data/final
 
-2- VEP
+# 2- VEP
 
-#nutvar2-master$ ./NutVar2_VEP.sh ~/Downloads/nutvar2-master user.vcf data/final
+nutvar2-master$ ./NutVar2_VEP.sh ~/Downloads/nutvar2-master user.vcf data/final
 
 Test:nutvar2-master$ ./NutVar2_VEP.sh ~/Downloads/nutvar2-master example.vcf data/final
 
-3- VEP and SnpEff
+# 3- VEP and SnpEff
 
-#nutvar2-maste$ ./NutVar2_snpEff_and_VEP.sh ~/Downloads/nutvar2-master example.vcf data/final
+nutvar2-maste$ ./NutVar2_snpEff_and_VEP.sh ~/Downloads/nutvar2-master example.vcf data/final
 
 
 
