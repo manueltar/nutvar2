@@ -62,7 +62,11 @@ Classifier of the potential pathogenicity of human genomic truncations
       
     #   ggplot package in R
     
-      Rstudio> install.packages("ggplot2")
+      RStudio> install.packages("ggplot2")
+    
+    # ROCR package in R
+    
+      RStudio> install.packages("ROCR")
 
  
 # NUTVAR2 INSTALLATION
