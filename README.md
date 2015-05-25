@@ -140,7 +140,3 @@ ISSUE!! Create a relative path to setwd in R
   # Output issue: Set an R top function to analyse the matrix of results of the user input.
   
   # Output issue: Integrate TAN-Bayes in this top function.
-
-
-
-
