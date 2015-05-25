@@ -127,6 +127,8 @@ ISSUE!! Create a relative path to setwd in R
 
   # Installation ISSUE!! The genomes are huge where are we going to allocate them online for the user to download? Right now I retrieve them from my local disk.
   
+  # Installation ISSUE!! Don't think its really necessary to set the path variables because the API is being installed directly with VEP
+  
   # Running Issue 1 !!-> combine VEP and SnpEf results somehow in the third option.
   
   # Running Issue 2 !!-> Allow some MPI option specially for VEP and also intra bash script, run script 25 while running the rest of scripts.
