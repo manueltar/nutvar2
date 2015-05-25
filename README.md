@@ -125,7 +125,7 @@ ISSUE!! Create a relative path to setwd in R
 
 # Issues
 
-  # Installation ISSUE!! The genomes are huge where are we going to allocate them online for the user to download?. Right now I retrieve them from my local disk.
+  # Installation ISSUE!! The genomes are huge where are we going to allocate them online for the user to download? Right now I retrieve them from my local disk.
   
   # Running Issue 1 !!-> combine VEP and SnpEf results somehow in the third option.
   
@@ -135,7 +135,7 @@ ISSUE!! Create a relative path to setwd in R
   
   # Training issue: 4 non Pathogenic splice variants of the training set have NaN as Percentage value, why?
   
-  # Training issue: Calssifysplice variants according to the length of the intron in which they lie in and the type of splice site: canonical versus non-canonical.
+  # Training issue: Calssify splice variants according to the length of the intron in which they lie in and the type of splice site: canonical versus non-canonical.
   
   # Output issue: Set an R top function to analyse the matrix of results of the user input.
   
