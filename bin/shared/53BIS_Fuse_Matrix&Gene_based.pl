@@ -275,7 +275,10 @@ if (open(OUTPUT, '>'.$output))
 	{		
 	foreach my $fields_tok(sort keys %{$hash1{$CHROM_POS_tok}{$REF_ALT_tok}{$SYMBOL_tok}})
 	{
-		print OUTPUT"$CHROM_POS_tok\t$REF_ALT_tok\t$SYMBOL_tok\t$fields_tok\tPEJMAN7\tPEJMAN8\t";
+		#~ print "BB:$fields_tok:BB\n";
+		if($fields_tok =~ /(.+)\t$/){$fields_tok = $1;}
+		#~ print "CC:$fields_tok:CC\n";
+		print OUTPUT"$CHROM_POS_tok\t$REF_ALT_tok\t$SYMBOL_tok\t$fields_tok\tPEJMAN5\tPEJMAN6\t";
 		my ($pRDG,$RVIS,$InnateImmunity,$Antiviral,$ISG,$OMIMrecessive)="NaN"x6;
 		if(exists($II_hash{$SYMBOL_tok})){$InnateImmunity=1;}else{$InnateImmunity=0;}
 		print OUTPUT"$InnateImmunity\t";
