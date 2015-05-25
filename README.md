@@ -62,7 +62,11 @@ Classifier of the potential pathogenicity of human genomic truncations
       
     #   ggplot package in R
     
-      Rstudio> install.packages("ggplot2")
+      RStudio> install.packages("ggplot2")
+    
+    # ROCR package in R
+    
+      RStudio> install.packages("ROCR")
 
  
 # NUTVAR2 INSTALLATION
@@ -90,7 +94,6 @@ cd nutvar2-master
 
   During the installation of ENSEMBL VEP for release 75 the user will be asked in he/she wants to install a cache version of the genome or Fasta files. In both cases the answer is NO, as the GRCh37.75 genome is provided within NuTVar2.
   
-  ISSUE!! The genomes are huge where are we going to allocate them online for the user to download?
 
 # RUNNING
 
@@ -99,9 +102,6 @@ cd nutvar2-master
 
 **Note: VEP is a very comprehensive and informative predictor of variant outcome, but its time of execution is way larger than that of SnpEff. If VEP is going to be used in large input vcf files, cut files in smaller subfiles prior to running NutVar2.
 
-
-Issue 1 !!-> combine VEP and SnpEf results somehow in the third option
-Issue 2 !!-> Allow some MPI option specially for VEP and also intra bash script, run script 25 while running the rest of scripts
 
 cd nutvar2-master
 
@@ -123,8 +123,20 @@ nutvar2-maste$ ./NutVar2_snpEff_and_VEP.sh ~/Downloads/nutvar2-master example.vc
 
 ISSUE!! Create a relative path to setwd in R
 
+# Issues
 
-
-
-
-
+  # Installation ISSUE!! The genomes are huge where are we going to allocate them online for the user to download?. Right now I retrieve them from my local disk.
+  
+  # Running Issue 1 !!-> combine VEP and SnpEf results somehow in the third option.
+  
+  # Running Issue 2 !!-> Allow some MPI option specially for VEP and also intra bash script, run script 25 while running the rest of scripts.
+  
+  # Training issue: Cannot introduce NaN in the code. Right now I am imputing NaN values to different proxys. See script Processing_data.R.
+  
+  # Training issue: 4 non Pathogenic splice variants of the training set have NaN as Percentage value, why?
+  
+  # Training issue: Calssifysplice variants according to the length of the intron in which they lie in and the type of splice site: canonical versus non-canonical.
+  
+  # Output issue: Set an R top function to analyse the matrix of results of the user input.
+  
+  # Output issue: Integrate TAN-Bayes in this top function.
