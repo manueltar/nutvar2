@@ -1,16 +1,14 @@
 
 # Set the working directory
 
-
-
-setwd("~/Downloads/nutvar2-master/data/final")
+setwd("~/Dropbox/Proyecto_NutVar2/nutvar2/data/training")
 
 #install.packages("ggplot2")
 library(ggplot2)
 
 # Open the initial table of data
 
-Matrix_of_data<-read.table(file="Matrix_vep_CCDS_added_gene_based_scores.txt" ,header=TRUE,sep ="\t",na.strings="NA")
+Matrix_of_data<-read.table(file="Matrix_snpeff_CCDS_plus_tags_added_gene_based_scores_NEW_RESULTS_DECEMBER_2014.txt" ,header=TRUE,sep ="\t",na.strings="NA")
 
 str(Matrix_of_data)
 
@@ -320,8 +318,22 @@ check_Percentage_seq_stop<-check.stop$PercentagePrincipalOrLongestCCDSAffected
 check_Percentage_seq_frameshift<-check.frameshift$PercentagePrincipalOrLongestCCDSAffected
 check_Percentage_seq_splice<-check.splice$PercentagePrincipalOrLongestCCDSAffected
 
+# Issue Splice variants for which percentage is NaN investigate why this is so, switching off this imputation
 
 Percentage_seq<-c(check_Percentage_seq_stop,check_Percentage_seq_frameshift,check_Percentage_seq_splice)
+Percentage_seq_imputed<-Percentage_seq
+
+Lebron<-is.na(Percentage_seq_imputed)
+summary(Lebron)
+for(i in 1:length(Percentage_seq_imputed))
+{
+  if(is.na( Percentage_seq_imputed[i]))
+  {
+    Percentage_seq_imputed[i]<-0
+  }  
+}
+Lebron<-is.na(Percentage_seq_imputed)
+summary(Lebron)
 
   # Here we calculate the mean for each of the groups
   
@@ -335,6 +347,23 @@ Percentage_seq<-c(check_Percentage_seq_stop,check_Percentage_seq_frameshift,chec
   stat_summary(fun.y=mean, colour="darkred", geom="point", 
                shape=18, size=4,show_guide = FALSE) + 
   annotate("text", x = 1:6, y = 110, label = means.Percentage_seq.rounded, size=5, colour="darkred")
+  dev.off()
+
+  # Here we calculate the mean for each of the groups
+  
+
+  # Here we calculate the mean for each of the groups
+  
+  means.Percentage_seq_imputed <- aggregate(Percentage_seq_imputed~grp, data=NULL, mean)
+  means.Percentage_seq_imputed.rounded <-round(means.Percentage_seq_imputed$Percentage_seq_imputed,2)
+  
+  # Here we boxplot the data
+  
+  pdf(file="boxplot_Percentage_seq_imputed.pdf")
+  ggplot(data=NULL, aes(x=grp, y=Percentage_seq_imputed)) + geom_boxplot(fill="steelblue") +
+    stat_summary(fun.y=mean, colour="darkred", geom="point", 
+                 shape=18, size=4,show_guide = FALSE) + 
+    annotate("text", x = 1:6, y = 110, label = means.Percentage_seq_imputed.rounded, size=5, colour="darkred")  
   dev.off()
 
 
@@ -372,14 +401,17 @@ Domain_percentage<-c(check_Domain_percentage_stop,check_Domain_percentage_frames
 # Impute Domain_percentage to seq Percetange when missing
 
 Domain_percentage_imputed<-Domain_percentage
-
+Harden<-is.na(Domain_percentage_imputed)
+summary(Harden)
 for(i in 1:length(Domain_percentage_imputed))
 {
   if(is.na(Domain_percentage_imputed[i]))
   {
-    Domain_percentage_imputed[i]<-Percentage_seq[i]
+    Domain_percentage_imputed[i]<-Percentage_seq_imputed[i]
   }  
 }
+Harden<-is.na(Domain_percentage_imputed)
+summary(Harden)
 
   # Here we calculate the mean for each of the groups
   
@@ -600,7 +632,7 @@ for(i in 1:length(Site_percentage_imputed))
 {
   if(is.na(Site_percentage_imputed[i]))
   {
-    Site_percentage_imputed[i]<-Percentage_seq[i]
+    Site_percentage_imputed[i]<-Percentage_seq_imputed[i]
   }  
 }
 
@@ -931,7 +963,8 @@ dev.off()
 
 result<-cbind(NMD,NMD_derived,Longest,APPRIS,Pervasive,Longest_length,Percentage_seq,Domain_INFO,Domain_percentage,MaxPerDomain,number_of_100_damaged,Domain_matched,Site_INFO,Site_percentage,MaxPerSite,number_of_100_damaged_Site,Site_matched,IImunity,Antiviral,ISG,OMIMrecessive,pRDG,RVIS,group)
 
-result_imputed<-cbind(NMD,NMD_derived,Longest,APPRIS_imputed,Pervasive_imputed,Longest_length,Percentage_seq,Domain_INFO,Domain_percentage_imputed,MaxPerDomain_imputed,number_of_100_damaged_imputed,Domain_matched_imputed,Site_INFO,Site_percentage_imputed,MaxPerSite_imputed,number_of_100_damaged_Site_imputed,Site_matched_imputed,IImunity,Antiviral,ISG,OMIMrecessive,pRDG,RVIS,group)
-
+result_imputed<-cbind(NMD,NMD_derived,Longest,APPRIS_imputed,Pervasive_imputed,Longest_length,Percentage_seq_imputed,Domain_INFO,Domain_percentage_imputed,MaxPerDomain_imputed,number_of_100_damaged_imputed,Domain_matched_imputed,Site_INFO,Site_percentage_imputed,MaxPerSite_imputed,number_of_100_damaged_Site_imputed,Site_matched_imputed,IImunity,Antiviral,ISG,OMIMrecessive,pRDG,RVIS,group)
+Lebron<-is.na(Percentage_seq_imputed)
+summary(Lebron)
 write.table(result,"Table.txt")
 write.table(result_imputed,"Table_imputed.txt")
