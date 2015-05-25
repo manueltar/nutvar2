@@ -125,14 +125,21 @@ ISSUE!! Create a relative path to setwd in R
 
 # Issues
 
-  # Installation ISSUE!! The genomes are huge where are we going to allocate them online for the user to download?. Right now I retrieve them from my local disk
-  # Running Issue 1 !!-> combine VEP and SnpEf results somehow in the third option
-  # Running Issue 2 !!-> Allow some MPI option specially for VEP and also intra bash script, run script 25 while running the rest of scripts
-  # Training issue: Cannot introduce NaN in the code. Right now I am imputing NaN values to different proxys. See script Processing_data.R
+  # Installation ISSUE!! The genomes are huge where are we going to allocate them online for the user to download?. Right now I retrieve them from my local disk.
+  
+  # Running Issue 1 !!-> combine VEP and SnpEf results somehow in the third option.
+  
+  # Running Issue 2 !!-> Allow some MPI option specially for VEP and also intra bash script, run script 25 while running the rest of scripts.
+  
+  # Training issue: Cannot introduce NaN in the code. Right now I am imputing NaN values to different proxys. See script Processing_data.R.
+  
   # Training issue: 4 non Pathogenic splice variants of the training set have NaN as Percentage value, why?
-  # Training issue: Calssifysplice variants according to the length of the intron in which they lie in and the type of splice site: canonical versus non-canonical
-  # Output issue: Set an R top function to analyse the matrix of results of the user input
-  # Output issue: Integrate TAN-Bayes in this top function
+  
+  # Training issue: Calssifysplice variants according to the length of the intron in which they lie in and the type of splice site: canonical versus non-canonical.
+  
+  # Output issue: Set an R top function to analyse the matrix of results of the user input.
+  
+  # Output issue: Integrate TAN-Bayes in this top function.
 
 
 
