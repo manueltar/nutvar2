@@ -133,6 +133,8 @@ ISSUE!! Create a relative path to setwd in R
   
   # Running Issue 2 !!-> Allow some MPI option specially for VEP and also intra bash script, run script 25 while running the rest of scripts.
   
+  # Running Issue 3: ExAC (22 Gb input vcf) has generated in the run 53 Gb of intermediate and final files. Consider erasing files whenever they are no longer needed downstream in the pipeline.
+  
   # Training issue: Cannot introduce NaN in the code. Right now I am imputing NaN values to different proxys. See script Processing_data.R.
   
   # Training issue: 4 non Pathogenic splice variants of the training set have NaN as Percentage value, why?
