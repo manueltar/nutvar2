@@ -124,7 +124,7 @@ perl SOFTWARE/ensembl-tools-release-75/scripts/variant_effect_predictor/INSTALL.
 
 # The genome files are obtained from ELSEWHERE (#ISSUE 1.2)
 
-echo obtaining the human genome version GRCh37.75 (VEP)
+echo obtaining the human genome version GRCh37.75
 
 scp -r /media/manueltar/Data/Dropbox/Dropbox/0_p_NutVar2/homo_sapiens_vep_75.tar.gz SOFTWARE/
 
