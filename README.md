@@ -127,6 +127,30 @@ ISSUE!! Create a relative path to setwd in R
 
   # Installation ISSUE!! The genomes are huge where are we going to allocate them online for the user to download? Right now I retrieve them from my local disk.
   
+  # Runing issues:
+  
+    # Search for a function that does not produce error when ordering Chrom X and Chrom Y like if they were numbers (sort?)
+    # Search the casuse for the messages (my own warnings)
+    
+        splice_in_last_component and
+        splice_in_mono_component
+        
+        This might be a quality control step in the initial parsing of the snpEff / VEP output
+        
+     # Re think the way we calculate NMD
+     
+        NMD --> 7_key_NMD_5.0_4.0.pl  stop_gained
+        NMD ---> 25_Downstream_frameshift_API_independent_5.0.pl frameshifts
+        NMD ---> new script for splice donor/acceptor variants
+        
+        
+       # Eliminate from the stand alone tool 24_snpEff_parser_def_minus_heather.pl and      24_snpEff_parser_def_minus_heather_2.0.pl   THEY ARE NOT USED 
+       # echo the running of each script in the pipeline
+        
+       
+  
+  ###################################################################################
+  
   # Installation ISSUE!! Don't think its really necessary to set the path variables because the API is being installed directly with VEP
   
   # Running Issue 1 !!-> combine VEP and SnpEf results somehow in the third option.
