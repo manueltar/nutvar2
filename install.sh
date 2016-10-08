@@ -12,10 +12,10 @@ mkdir SOFTWARE/snpEff
 unzip SOFTWARE/snpEff_v3_6_core.zip -d ./SOFTWARE/
 rm SOFTWARE/snpEff_v3_6_core.zip
 
-# The genome files are obtained from ELSEWHERE (#ISSUE 1.1)
+# The genome files are obtained from ELSEWHERE (#ISSUE 1.1) ALL OF THESE FILES ARE OBTAINED FROM LOCAL THIS HAS TO CHANGE
 
 echo obtaining the human genome version GRCh37.75
-scp -r /home/manueltar/Dropbox/Proyecto_NutVar2/snpEff_v3_6_GRCh37.75.zip SOFTWARE/snpEff
+scp -r /media/manueltar/Data/Dropbox/Dropbox/0_p_NutVar2/snpEff_v3_6_GRCh37.75.zip SOFTWARE/snpEff
 unzip SOFTWARE/snpEff/snpEff_v3_6_GRCh37.75.zip -d ./SOFTWARE/snpEff/
 rm SOFTWARE/snpEff/snpEff_v3_6_GRCh37.75.zip
 
@@ -124,9 +124,9 @@ perl SOFTWARE/ensembl-tools-release-75/scripts/variant_effect_predictor/INSTALL.
 
 # The genome files are obtained from ELSEWHERE (#ISSUE 1.2)
 
-echo obtaining the human genome version GRCh37.75 for VEP
+echo obtaining the human genome version GRCh37.75 (VEP)
 
-scp -r /home/manueltar/Dropbox/Proyecto_NutVar2/homo_sapiens_vep_75.tar.gz SOFTWARE/
+scp -r /media/manueltar/Data/Dropbox/Dropbox/0_p_NutVar2/homo_sapiens_vep_75.tar.gz SOFTWARE/
 
 mkdir SOFTWARE/vep/
 mv SOFTWARE/vep/ SOFTWARE/.vep
