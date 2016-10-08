@@ -144,5 +144,5 @@ rm SOFTWARE/homo_sapiens_vep_75.tar.gz
 # Creating directories needed to run nutvar2
 
 mkdir data/input/
-mkdir data/intermediate/
+# mkdir data/intermediate/
 
