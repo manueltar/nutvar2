@@ -147,7 +147,7 @@ ISSUE!! Create a relative path to setwd in R
        # Eliminate from the stand alone tool 24_snpEff_parser_def_minus_heather.pl and      24_snpEff_parser_def_minus_heather_2.0.pl   THEY ARE NOT USED 
        # echo the running of each script in the pipeline
         
-       
+       # data/final should have the date of creation of the folder
   
   ###################################################################################
   
